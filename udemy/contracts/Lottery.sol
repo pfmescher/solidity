@@ -4,6 +4,7 @@ contract Lottery {
     address public manager;
     address[] public players;
 
+    // ----------- public functions -----------
     function Lottery() public {
         manager = msg.sender;
     }
@@ -21,9 +22,16 @@ contract Lottery {
         players = new address[](0);
     }
 
+    // ----------- modifiers -----------
     modifier restricted() {
         require(msg.sender == manager);
         _;
+    }
+
+    // ----------- private functions -----------
+
+    function getPlayers() public view returns (address[]) {
+        return players;
     }
 
     // Pseudorandom number generator
